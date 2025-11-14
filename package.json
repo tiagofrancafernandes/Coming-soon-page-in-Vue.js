@@ -1,0 +1,25 @@
+{
+    "name": "coming-soon-page",
+    "version": "1.0.0",
+    "description": "A basic coming soon page using Vue 3, Vue Router, and TailwindCSS",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "dev:open": "vite --open",
+        "build": "vite build",
+        "prettier": "prettier -w --config ./.prettierrc .",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "vue": "^3.3.4",
+        "vue-router": "^4.2.4"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^4.3.4",
+        "autoprefixer": "^10.4.16",
+        "postcss": "^8.4.31",
+        "prettier": "^3.6.2",
+        "tailwindcss": "^3.3.5",
+        "vite": "^4.4.9"
+    }
+}

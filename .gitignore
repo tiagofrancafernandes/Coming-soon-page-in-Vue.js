@@ -1,0 +1,16 @@
+node_modules
+dist
+.dist
+output
+.output
+
+*no*commit*
+*No*Commit*
+*NO*COMMIT*
+*.bkp.*
+*.bkp
+*.log
+*.swp
+*.out
+*.zip
+_ide_helper*
