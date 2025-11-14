@@ -1,7 +1,7 @@
 <!-- src/components/ComingSoon.vue -->
 <template>
     <div
-        class="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-800 flex items-center justify-center px-4 sm:px-6 lg:px-8"
+        class="min-h-screen bg-linear-to-br from-blue-900 via-purple-900 to-pink-800 flex items-center justify-center px-4 sm:px-6 lg:px-8"
     >
         <div class="max-w-md w-full space-y-8 text-center">
             <!-- Logo/Brand Section -->
@@ -41,18 +41,18 @@
             <!-- Email Signup -->
             <div class="bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-6 animate-fade-in-up animation-delay-300">
                 <h2 class="text-white text-xl font-semibold mb-4">Stay Updated</h2>
-                <p class="text-blue-200 mb-4 text-sm">Get notified when we launch</p>
+                <p class="text-blue-200 dark:text-blue-200 mb-4 text-sm">Get notified when we launch</p>
                 <form @submit.prevent="handleSubscribe" class="space-y-3">
                     <input
                         v-model="email"
                         type="email"
                         placeholder="Your email address"
-                        class="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
                         required
                     />
                     <button
                         type="submit"
-                        class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition duration-300 transform hover:scale-105"
+                        class="w-full bg-linear-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition duration-300 transform hover:scale-105"
                     >
                         Notify Me
                     </button>
@@ -79,7 +79,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import {
+    onMounted,
+    onUnmounted,
+    ref,
+} from 'vue';
 
 const email = ref('');
 const days = ref(0);

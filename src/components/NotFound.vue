@@ -1,7 +1,7 @@
 <!-- src/components/NotFound.vue -->
 <template>
     <div
-        class="min-h-screen bg-gradient-to-br from-gray-900 to-purple-900 flex items-center justify-center px-4 sm:px-6 lg:px-8"
+        class="min-h-screen bg-linear-to-br from-gray-900 to-purple-900 flex items-center justify-center px-4 sm:px-6 lg:px-8"
     >
         <div class="max-w-md w-full text-center">
             <div class="animate-bounce mb-8">
