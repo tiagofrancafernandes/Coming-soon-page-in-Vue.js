@@ -3,9 +3,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --animate-fade-in-down: fadeInDown 1s ease-out;
-  --animate-fade-in-up: fadeInUp 1s ease-out;
-  --animate-bounce: bounce 1s infinite;
+    --animate-fade-in-down: fadeInDown 1s ease-out;
+    --animate-fade-in-up: fadeInUp 1s ease-out;
+    --animate-bounce: bounce 1s infinite;
 }
 
 /*
@@ -17,11 +17,11 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentcolor);
+    }
 }

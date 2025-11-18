@@ -79,11 +79,7 @@
 </template>
 
 <script setup>
-import {
-    onMounted,
-    onUnmounted,
-    ref,
-} from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 const email = ref('');
 const days = ref(0);
