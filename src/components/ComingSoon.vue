@@ -136,7 +136,7 @@
                         v-model="email"
                         type="email"
                         placeholder="Your email address"
-                        class="w-full px-4 py-3 rounded-lg text-gray-800 dark:text-gray-100 bg-white dark:bg-gray-800 focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-300 placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                        class="w-full px-4 py-3 rounded-lg text-gray-800 dark:text-gray-100 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-300 placeholder:text-gray-500 dark:placeholder:text-gray-400"
                         required
                     />
                     <button
