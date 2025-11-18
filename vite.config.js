@@ -11,6 +11,9 @@ export default defineConfig({
     server: {
         port: 3000,
         open: true,
+        watch: {
+            usePolling: true, // Optional: useful in some environments like WSL2
+        },
     },
     resolve: {
         alias: {
