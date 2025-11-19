@@ -1,6 +1,6 @@
 <template>
     <div
-        class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-900 dark:via-purple-900 dark:to-pink-800 flex flex-col items-center justify-center p-0 transition-colors duration-300 pb-15"
+        class="min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-900 dark:via-purple-900 dark:to-pink-800 flex flex-col items-center justify-center p-0 transition-colors duration-300 pb-15"
     >
         <div class="flex flex-col w-full p-0">
             <div class="md:max-w-lg mx-auto w-full space-y-8 text-center px-4 sm:px-6 lg:px-8">
@@ -97,13 +97,13 @@
                 <div class="animate-fade-in-up animation-delay-300">
                     <router-link
                         to="/"
-                        class="inline-block bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-600 dark:to-purple-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 dark:hover:from-blue-700 dark:hover:to-purple-800 transition duration-300 transform hover:scale-105 shadow-md"
+                        class="inline-block bg-linear-to-r from-blue-500 to-purple-600 dark:from-blue-600 dark:to-purple-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 dark:hover:from-blue-700 dark:hover:to-purple-800 transition duration-300 transform hover:scale-105 shadow-md"
                     >
                         ← Back to Home
                     </router-link>
                     <router-link
                         to="/examples"
-                        class="inline-block ml-3 bg-gradient-to-r from-green-500 to-teal-600 dark:from-green-600 dark:to-teal-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-teal-700 dark:hover:from-green-700 dark:hover:to-teal-800 transition duration-300 transform hover:scale-105 shadow-md"
+                        class="inline-block ml-3 bg-linear-to-r from-green-500 to-teal-600 dark:from-green-600 dark:to-teal-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-teal-700 dark:hover:from-green-700 dark:hover:to-teal-800 transition duration-300 transform hover:scale-105 shadow-md"
                     >
                         View Examples →
                     </router-link>
@@ -118,12 +118,19 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import {
+    computed,
+    ref,
+} from 'vue';
+
 import { useRoute } from 'vue-router';
 
 import Counter from '@/components/Counter.vue';
 import Footer from '@/components/Layout/Footer.vue';
-import { ifValidDate, isFutureDate } from '@/utils/helpers.js';
+import {
+    ifValidDate,
+    isFutureDate,
+} from '@/utils/helpers.js';
 
 const route = useRoute();
 

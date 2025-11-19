@@ -1,6 +1,6 @@
 <template>
     <div
-        class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-900 dark:via-purple-900 dark:to-pink-800 flex flex-col items-center justify-center p-4 transition-colors duration-300"
+        class="min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-900 dark:via-purple-900 dark:to-pink-800 flex flex-col items-center justify-center p-4 transition-colors duration-300"
     >
         <div class="max-w-4xl w-full space-y-8">
             <!-- Header -->
@@ -21,7 +21,7 @@
                 <div
                     v-for="example in longTermExamples"
                     :key="example.id"
-                    class="bg-white dark:bg-white bg-opacity-70 dark:bg-opacity-10 backdrop-blur-md rounded-lg p-6 shadow-lg dark:shadow-none transition-all duration-300 hover:scale-105 transform"
+                    class="bg-white dark:bg-gray-800 bg-opacity-70 dark:bg-opacity-90 backdrop-blur-md rounded-lg p-6 shadow-lg dark:shadow-xl transition-all duration-300 hover:scale-105 transform"
                 >
                     <div class="mb-4">
                         <span
@@ -41,7 +41,7 @@
                     </p>
                     <router-link
                         :to="getCountdownRoute(example.date)"
-                        class="inline-block w-full text-center bg-gradient-to-r from-purple-500 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-700 transition duration-300"
+                        class="inline-block w-full text-center bg-linear-to-r from-purple-500 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-700 transition duration-300"
                     >
                         View Countdown →
                     </router-link>
@@ -51,7 +51,7 @@
                 <div
                     v-for="example in mediumTermExamples"
                     :key="example.id"
-                    class="bg-white dark:bg-white bg-opacity-70 dark:bg-opacity-10 backdrop-blur-md rounded-lg p-6 shadow-lg dark:shadow-none transition-all duration-300 hover:scale-105 transform"
+                    class="bg-white dark:bg-gray-800 bg-opacity-70 dark:bg-opacity-90 backdrop-blur-md rounded-lg p-6 shadow-lg dark:shadow-xl transition-all duration-300 hover:scale-105 transform"
                 >
                     <div class="mb-4">
                         <span
@@ -71,7 +71,7 @@
                     </p>
                     <router-link
                         :to="getCountdownRoute(example.date)"
-                        class="inline-block w-full text-center bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-cyan-700 transition duration-300"
+                        class="inline-block w-full text-center bg-linear-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-cyan-700 transition duration-300"
                     >
                         View Countdown →
                     </router-link>
@@ -81,7 +81,7 @@
                 <div
                     v-for="example in shortTermExamples"
                     :key="example.id"
-                    class="bg-white dark:bg-white bg-opacity-70 dark:bg-opacity-10 backdrop-blur-md rounded-lg p-6 shadow-lg dark:shadow-none transition-all duration-300 hover:scale-105 transform"
+                    class="bg-white dark:bg-gray-800 bg-opacity-70 dark:bg-opacity-90 backdrop-blur-md rounded-lg p-6 shadow-lg dark:shadow-xl transition-all duration-300 hover:scale-105 transform"
                 >
                     <div class="mb-4">
                         <span
@@ -101,7 +101,7 @@
                     </p>
                     <router-link
                         :to="getCountdownRoute(example.date)"
-                        class="inline-block w-full text-center bg-gradient-to-r from-green-500 to-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-green-600 hover:to-teal-700 transition duration-300"
+                        class="inline-block w-full text-center bg-linear-to-r from-green-500 to-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-green-600 hover:to-teal-700 transition duration-300"
                     >
                         View Countdown →
                     </router-link>
@@ -112,7 +112,7 @@
             <div class="text-center animate-fade-in-up animation-delay-300">
                 <router-link
                     to="/"
-                    class="inline-block bg-gradient-to-r from-gray-500 to-gray-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-gray-600 hover:to-gray-800 transition duration-300 transform hover:scale-105 shadow-md"
+                    class="inline-block bg-linear-to-r from-gray-500 to-gray-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-gray-600 hover:to-gray-800 transition duration-300 transform hover:scale-105 shadow-md"
                 >
                     ← Back to Home
                 </router-link>
