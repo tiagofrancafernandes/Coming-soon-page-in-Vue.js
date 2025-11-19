@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import ComingSoon from './components/ComingSoon.vue';
+import CustomDate from './components/CustomDate.vue';
+import Examples from './components/Examples.vue';
 import NotFound from './components/NotFound.vue';
 
 // Create router
@@ -9,6 +11,8 @@ const router = createRouter({
     routes: [
         { path: '/', component: ComingSoon },
         { path: '/coming-soon', component: ComingSoon },
+        { path: '/countdown/:date', component: CustomDate, name: 'countdown' },
+        { path: '/examples', component: Examples },
         { path: '/:pathMatch(.*)*', component: NotFound },
     ],
 });
