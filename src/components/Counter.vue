@@ -35,17 +35,10 @@
 </template>
 
 <script setup lang="js">
-import {
-    onMounted,
-    onUnmounted,
-    ref,
-} from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 import CounterSquare from '@/components/CounterSquare.vue';
-import {
-    formatMinSlot,
-    formatSlot,
-} from '@/utils/helpers.js';
+import { formatMinSlot, formatSlot } from '@/utils/helpers.js';
 
 // formatMinSlot
 

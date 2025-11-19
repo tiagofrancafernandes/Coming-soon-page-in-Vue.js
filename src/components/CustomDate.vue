@@ -77,7 +77,7 @@
                 <div
                     class="bg-white dark:bg-white bg-opacity-70 dark:bg-opacity-10 backdrop-blur-md rounded-lg p-4 animate-fade-in-up shadow-lg dark:shadow-none transition-all duration-300"
                 >
-                    <p class="text-gray-700 dark:text-gray-300 text-sm transition-colors duration-300">
+                    <p class="text-gray-700 dark:text-gray-500 text-sm transition-colors duration-300">
                         <strong>Target Date:</strong>
                         {{ formattedDate }}
                     </p>

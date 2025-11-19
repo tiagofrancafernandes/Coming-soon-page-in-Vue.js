@@ -1,14 +1,15 @@
 <template>
     <button
         @click="toggleTheme"
-        class="cursor-pointer px-2 py-1 rounded-md"
-        :class="[currentTheme === 'dark' ? 'text-white' : 'text-gray-600']"
+        class="cursor-pointer px-2 py-1 rounded-md text-purple-600 dark:text-purple-200 min-w-8 min-h-8"
+        :class="[]"
     >
         <svg
-            v-show="currentTheme === 'dark'"
+            v-if="currentTheme === 'dark'"
+            class="w-8 h-8"
             xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
+            awidth="32"
+            aheight="32"
             viewBox="0 0 24 24"
         >
             <!-- Icon from Material Line Icons by Vjacheslav Trushkin - https://github.com/cyberalien/line-md/blob/master/license.txt -->
@@ -67,10 +68,11 @@
             </g>
         </svg>
         <svg
-            v-show="currentTheme !== 'dark'"
+            v-if="currentTheme !== 'dark'"
+            class="w-8 h-8"
             xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
+            awidth="32"
+            aheight="32"
             viewBox="0 0 24 24"
         >
             <!-- Icon from Material Line Icons by Vjacheslav Trushkin - https://github.com/cyberalien/line-md/blob/master/license.txt -->
