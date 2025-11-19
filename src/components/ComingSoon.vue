@@ -102,6 +102,16 @@
                     </form>
                 </div>
 
+                <!-- Examples Link -->
+                <div class="animate-fade-in-up animation-delay-450">
+                    <router-link
+                        to="/examples"
+                        class="inline-block bg-linear-to-r from-green-500 to-teal-600 dark:from-green-600 dark:to-teal-700 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-teal-700 dark:hover:from-green-700 dark:hover:to-teal-800 transition duration-300 transform hover:scale-105 shadow-md"
+                    >
+                        📅 View Countdown Examples
+                    </router-link>
+                </div>
+
                 <!-- Social Links -->
                 <div class="animate-fade-in-up animation-delay-600 mb-2">
                     <p class="text-blue-700 dark:text-blue-200 text-sm mb-4 transition-colors duration-300">
