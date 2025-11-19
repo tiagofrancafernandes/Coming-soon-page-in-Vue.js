@@ -87,8 +87,11 @@
                 <div
                     class="bg-white dark:bg-white bg-opacity-70 dark:bg-opacity-10 backdrop-blur-md rounded-lg p-6 animate-fade-in-up shadow-lg dark:shadow-none transition-all duration-300 px-4"
                 >
-                    <h2 class="dark:text-gray-900 text-white text-xl font-semibold mb-4 transition-colors duration-300">
-                        Time Remaining
+                    <h2
+                        v-if="eventLabel"
+                        class="dark:text-gray-900 text-white text-xl font-semibold mb-4 transition-colors duration-300"
+                    >
+                        {{ eventLabel }}
                     </h2>
                     <Counter :finalDate="finalDate" />
                 </div>
@@ -114,34 +117,39 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 import { useRoute } from 'vue-router';
 
 import Counter from '@/components/Counter.vue';
-import { ifValidDate, isFutureDate } from '@/utils/helpers.js';
+import { ifValidDate, isFutureDate, normalizeLocale } from '@/utils/helpers.js';
 
 const route = useRoute();
 
 // Pega a data da URL
 const dateParam = route.params.date || null;
+const eventLabel = route.query?.label || route.query?.title || 'Time Remaining';
+const dateLocaleCode = normalizeLocale(import.meta.env.VITE_DATE_LOCALE_CODE || 'en-US');
 
 // Valida a data
 const validatedDate = ifValidDate(dateParam);
 const isValidDate = computed(() => validatedDate && isFutureDate(validatedDate));
 
 // Data final para o contador
-const finalDate = ref(null);
+const finalDate = ref(validatedDate || null);
 
-if (isValidDate.value) {
-    finalDate.value = validatedDate;
-} else {
+const finalDateCheck = () => {
+    if (validatedDate) {
+        finalDate.value = validatedDate;
+        return;
+    }
+
     // Data exemplo: hoje + 30 dias às 14 horas
     const exampleDate = new Date();
     exampleDate.setDate(exampleDate.getDate() + 30);
     exampleDate.setHours(14, 0, 0, 0);
     finalDate.value = exampleDate;
-}
+};
 
 // Mensagem descritiva
 const dateMessage = computed(() => {
@@ -153,10 +161,18 @@ const dateMessage = computed(() => {
 
 // Data formatada para exibição
 const formattedDate = computed(() => {
-    return finalDate.value.toLocaleString('pt-BR', {
+    if (!ifValidDate(finalDate.value)) {
+        return '';
+    }
+
+    return finalDate.value.toLocaleString(dateLocaleCode, {
         dateStyle: 'full',
         timeStyle: 'short',
     });
+});
+
+onMounted(() => {
+    finalDateCheck();
 });
 </script>
 

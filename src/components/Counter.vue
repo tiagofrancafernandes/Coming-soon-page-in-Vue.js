@@ -1,27 +1,21 @@
 <template>
     <div class="w-full">
         <div
+            :data-ymh-cols="ymhCols"
             :class="[
                 'grid gap-4 mb-5',
                 {
-                    'grid-cols-1': (days / 7).toFixed(0) >= 1 && (days / 28).toFixed(0) < 1,
-                    'grid-cols-2': (days / 7).toFixed(0) >= 1 && (days / 28).toFixed(0) >= 1,
+                    'grid-cols-1': ymhCols === 1 || !ymhCols,
+                    'grid-cols-2': ymhCols === 2,
+                    'grid-cols-3': ymhCols === 3,
                 },
             ]"
         >
-            <CounterSquare
-                v-if="(days / 28).toFixed(0) >= 1"
-                :label="(days / 28).toFixed(0) > 1 ? 'Months' : 'Month'"
-                id="months"
-                :value="(days / 28).toFixed(0)"
-            />
+            <CounterSquare v-if="years >= 1" :label="years > 1 ? 'Years' : 'Year'" id="years" :value="years" />
 
-            <CounterSquare
-                v-if="(days / 7).toFixed(0) >= 1"
-                :label="(days / 7).toFixed(0) > 1 ? 'Weeks' : 'Week'"
-                id="weeks"
-                :value="(days / 7).toFixed(0)"
-            />
+            <CounterSquare v-if="months >= 1" :label="months > 1 ? 'Months' : 'Month'" id="months" :value="months" />
+
+            <CounterSquare v-if="weeks >= 1" :label="weeks > 1 ? 'Weeks' : 'Week'" id="weeks" :value="weeks" />
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -35,11 +29,15 @@
 </template>
 
 <script setup lang="js">
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 import CounterSquare from '@/components/CounterSquare.vue';
-import { formatMinSlot, formatSlot } from '@/utils/helpers.js';
+import { diffCalendar, diffFromNow, formatMinSlot, formatSlot, ifValidDate, isFutureDate } from '@/utils/helpers.js';
 
+// diffFromNow,
+// diffCalendar,
+// ifValidDate,
+// isFutureDate,
 // formatMinSlot
 
 const props = defineProps({
@@ -53,6 +51,9 @@ const props = defineProps({
 });
 
 const email = ref('');
+const years = ref(0);
+const months = ref(0);
+const weeks = ref(0);
 const days = ref(0);
 const hours = ref(0);
 const minutes = ref(0);
@@ -60,8 +61,10 @@ const seconds = ref(0);
 const milliseconds = ref(0);
 let countdownInterval = null;
 
+const ymhCols = computed(() => [years.value > 0, months.value > 0, weeks.value > 0].filter(Boolean).length);
+
 // Set launch date (30 days from now)
-let finalDate = props?.finalDate || null;
+let finalDate = ifValidDate(props?.finalDate) || null;
 
 if (props?.fakeDate || !finalDate) {
     finalDate = new Date().getDate() + 30; // fake date
@@ -76,20 +79,34 @@ const updateCountdown = () => {
 
     if (distance < 0) {
         clearInterval(countdownInterval);
-        days.value = formatSlot(0, 2);
+        years.value = formatSlot(0, 2, 2);
+        months.value = formatSlot(0, 2, 2);
+        weeks.value = formatSlot(0, 2, 2);
+        days.value = formatSlot(0, 2, 2);
         hours.value = formatSlot(0, 2);
         minutes.value = formatSlot(0, 2);
         seconds.value = formatSlot(0, 2);
-        milliseconds.value = formatSlot(0, 2);
+        milliseconds.value = formatSlot(0, 3);
         return;
     }
 
-    days.value = formatSlot(Math.floor(distance / (1000 * 60 * 60 * 24)), 2);
-    hours.value = formatSlot(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)), 2);
-    minutes.value = formatSlot(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)), 2);
-    seconds.value = formatSlot(Math.floor((distance % (1000 * 60)) / 1000), 2);
-    // milliseconds.value = Math.floor((distance % (1000 * 60)));
-    milliseconds.value = formatSlot(new Date(distance).getMilliseconds(), 2);
+    let diffData = diffCalendar(launchDate);
+
+    years.value = formatSlot(diffData.years || 0, 2);
+    months.value = formatSlot(diffData.months || 0, 2);
+    weeks.value = formatSlot(diffData.weeks || 0, 2);
+    days.value = formatSlot(diffData.days || 0, 2);
+    hours.value = formatSlot(diffData.hours || 0, 2);
+    minutes.value = formatSlot(diffData.minutes || 0, 2);
+    seconds.value = formatSlot(diffData.seconds || 0, 2);
+    milliseconds.value = formatSlot(diffData.milliseconds || 0, 3);
+
+    // days.value = formatSlot(Math.floor(distance / (1000 * 60 * 60 * 24)), 2, 4);
+    // hours.value = formatSlot(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)), 2);
+    // minutes.value = formatSlot(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)), 2);
+    // seconds.value = formatSlot(Math.floor((distance % (1000 * 60)) / 1000), 2);
+    // // milliseconds.value = Math.floor((distance % (1000 * 60)));
+    // milliseconds.value = formatSlot(new Date(distance).getMilliseconds(), 2);
 };
 
 const handleSubscribe = () => {

@@ -8,6 +8,10 @@
         "dev:open": "vite --open",
         "build": "vite build",
         "prettier": "prettier -w --config ./.prettierrc .",
+        "install-legacy": "npm install --legacy-peer-deps",
+        "install-legacy-ci": "npm ci --legacy-peer-deps",
+        "install-legacy-package-lock": "npm install --package-lock-only --legacy-peer-deps",
+        "install-legacy-package-lock-ci": "npm ci --package-lock-only --legacy-peer-deps",
         "preview": "vite preview"
     },
     "dependencies": {

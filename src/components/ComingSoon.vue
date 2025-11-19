@@ -1,4 +1,3 @@
-<!-- src/components/ComingSoon.vue -->
 <template>
     <div
         class="min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-900 dark:via-purple-900 dark:to-pink-800 flex flex-col items-center justify-center p-0 transition-colors duration-300 pb-15"
@@ -65,12 +64,25 @@
                     </p>
                 </div>
 
+                <!-- Date Info -->
+                <div
+                    class="bg-white dark:bg-white bg-opacity-70 dark:bg-opacity-10 backdrop-blur-md rounded-lg p-4 animate-fade-in-up shadow-lg dark:shadow-none transition-all duration-300"
+                >
+                    <p class="text-gray-700 dark:text-gray-500 text-sm transition-colors duration-300">
+                        <strong>Target Date:</strong>
+                        {{ formattedDate }}
+                    </p>
+                </div>
+
                 <!-- Countdown Timer -->
                 <div
                     class="bg-white dark:bg-white bg-opacity-70 dark:bg-opacity-10 backdrop-blur-md rounded-lg p-6 animate-fade-in-up shadow-lg dark:shadow-none transition-all duration-300 px-4"
                 >
-                    <h2 class="dark:text-gray-900 text-white text-xl font-semibold mb-4 transition-colors duration-300">
-                        Launching in
+                    <h2
+                        v-if="eventLabel"
+                        class="dark:text-gray-900 text-white text-xl font-semibold mb-4 transition-colors duration-300"
+                    >
+                        {{ eventLabel }}
                     </h2>
                     <Counter :finalDate="finalDate" />
                 </div>
@@ -208,7 +220,97 @@
 </template>
 
 <script setup>
-import Counter from '@/components/Counter.vue';
+import { computed, onMounted, ref } from 'vue';
 
-const finalDate = '2025-11-20 00:00';
+import { useRoute } from 'vue-router';
+
+import Counter from '@/components/Counter.vue';
+import { ifValidDate, isFutureDate, normalizeLocale } from '@/utils/helpers.js';
+
+const route = useRoute();
+
+// Pega a data da URL
+const dateParam = import.meta.env.VITE_HOME_COUNTDOWN_DATE || '2026-12-25 00:00';
+const eventLabel = import.meta.env.VITE_HOME_COUNTDOWN_LABEL || 'Launching in';
+const dateLocaleCode = normalizeLocale(import.meta.env.VITE_DATE_LOCALE_CODE || 'en-US');
+
+// Valida a data
+const validatedDate = ifValidDate(dateParam);
+const isValidDate = computed(() => validatedDate && isFutureDate(validatedDate));
+
+// Data final para o contador
+const finalDate = ref(validatedDate || null);
+
+const finalDateCheck = () => {
+    if (validatedDate) {
+        finalDate.value = validatedDate;
+        return;
+    }
+
+    // Data exemplo: hoje + 30 dias às 14 horas
+    const exampleDate = new Date();
+    exampleDate.setDate(exampleDate.getDate() + 30);
+    exampleDate.setHours(14, 0, 0, 0);
+    finalDate.value = exampleDate;
+};
+
+// Mensagem descritiva
+const dateMessage = computed(() => {
+    if (isValidDate.value) {
+        return 'Counting down to your custom date';
+    }
+    return 'Using example date (30 days from now at 2 PM)';
+});
+
+// Data formatada para exibição
+const formattedDate = computed(() => {
+    if (!ifValidDate(finalDate.value)) {
+        return '';
+    }
+
+    return finalDate.value.toLocaleString(dateLocaleCode, {
+        dateStyle: 'full',
+        timeStyle: 'short',
+    });
+});
+
+onMounted(() => {
+    finalDateCheck();
+});
 </script>
+
+<style>
+.animate-fade-in-down {
+    animation: fadeInDown 1s ease-out;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 1s ease-out;
+}
+
+.animation-delay-300 {
+    animation-delay: 0.3s;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>

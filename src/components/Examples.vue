@@ -40,7 +40,7 @@
                         📅 {{ formatDate(example.date) }}
                     </p>
                     <router-link
-                        :to="getCountdownRoute(example.date)"
+                        :to="getCountdownRoute(example)"
                         class="inline-block w-full text-center bg-linear-to-r from-purple-500 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-700 transition duration-300"
                     >
                         View Countdown →
@@ -70,7 +70,7 @@
                         📅 {{ formatDate(example.date) }}
                     </p>
                     <router-link
-                        :to="getCountdownRoute(example.date)"
+                        :to="getCountdownRoute(example)"
                         class="inline-block w-full text-center bg-linear-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-cyan-700 transition duration-300"
                     >
                         View Countdown →
@@ -100,7 +100,7 @@
                         📅 {{ formatDate(example.date) }}
                     </p>
                     <router-link
-                        :to="getCountdownRoute(example.date)"
+                        :to="getCountdownRoute(example)"
                         class="inline-block w-full text-center bg-linear-to-r from-green-500 to-teal-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-green-600 hover:to-teal-700 transition duration-300"
                     >
                         View Countdown →
@@ -151,7 +151,7 @@ const longTermExamples = computed(() => [
     {
         id: 'christmas-2025',
         category: 'Long-term',
-        title: 'Christmas 2025',
+        title: '🎄 Christmas 2025',
         description: 'Holiday season celebration',
         date: '2025-12-25T00:00:00',
     },
@@ -161,6 +161,13 @@ const longTermExamples = computed(() => [
         title: '6 Months Away',
         description: 'Half a year from now',
         date: createFutureDate(180, 15, 30),
+    },
+    {
+        id: '18-months',
+        category: 'Long-term',
+        title: '18 Months Away',
+        description: '1 and a half a year from now',
+        date: createFutureDate(540, 15, 30),
     },
 ]);
 
@@ -242,8 +249,12 @@ const formatDate = (dateString) => {
 };
 
 // Gera a rota para o countdown
-const getCountdownRoute = (dateString) => {
-    return `/countdown/${encodeURIComponent(dateString)}`;
+const getCountdownRoute = (itemData) => {
+    let dateString = encodeURIComponent(itemData.date);
+    let labelString = encodeURIComponent((itemData?.label || itemData?.title).trim());
+    let paramsAsString = `?label=${labelString}`;
+    // paramsAsString += `&date=${dateString}`;
+    return `/countdown/${dateString}${paramsAsString}`;
 };
 </script>
 
