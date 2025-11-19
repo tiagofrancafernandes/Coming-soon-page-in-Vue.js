@@ -118,17 +118,11 @@
                 </router-link>
             </div>
         </div>
-
-        <div class="flex flex-col w-full p-0 mt-8">
-            <Footer />
-        </div>
     </div>
 </template>
 
 <script setup>
 import { computed } from 'vue';
-
-import Footer from '@/components/Layout/Footer.vue';
 
 // Função para criar data futura
 const createFutureDate = (daysFromNow, hours = 12, minutes = 0) => {

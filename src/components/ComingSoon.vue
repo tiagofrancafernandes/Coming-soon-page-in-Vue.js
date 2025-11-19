@@ -194,10 +194,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="flex flex-col w-full p-0 -fixed -mb-[5.1rem]">
-            <Footer />
-        </div>
     </div>
 </template>
 

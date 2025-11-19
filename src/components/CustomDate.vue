@@ -110,27 +110,16 @@
                 </div>
             </div>
         </div>
-
-        <div class="flex flex-col w-full p-0 -fixed -mb-[5.1rem]">
-            <Footer />
-        </div>
     </div>
 </template>
 
 <script setup>
-import {
-    computed,
-    ref,
-} from 'vue';
+import { computed, ref } from 'vue';
 
 import { useRoute } from 'vue-router';
 
 import Counter from '@/components/Counter.vue';
-import Footer from '@/components/Layout/Footer.vue';
-import {
-    ifValidDate,
-    isFutureDate,
-} from '@/utils/helpers.js';
+import { ifValidDate, isFutureDate } from '@/utils/helpers.js';
 
 const route = useRoute();
 
