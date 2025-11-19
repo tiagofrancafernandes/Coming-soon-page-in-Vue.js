@@ -13,21 +13,28 @@
                 {{ props?.value }}
             </template>
         </div>
-        <div class="text-sm text-blue-700 dark:text-blue-200 transition-colors duration-300">{{ props?.label }}</div>
+        <div class="text-sm text-blue-700 dark:text-blue-200 transition-colors duration-300">
+            <template v-if="isPlural()">
+                {{ props?.label }}
+            </template>
+            <template v-else>
+                {{ singularLabel || props?.label }}
+            </template>
+        </div>
     </div>
 </template>
 
 <script setup lang="js">
-// import { useSlots, useAttrs } from 'vue';
-
-// const slots = useSlots();
-// const attrs = useAttrs();
-
 const props = defineProps({
     value: {
+        type: [Number, String, null],
         default: null,
     },
     label: {
+        type: String,
+        default: null,
+    },
+    singularLabel: {
         type: String,
         default: null,
     },
@@ -35,4 +42,7 @@ const props = defineProps({
         type: String,
     },
 });
+
+const isPlural = () => Number(props?.value || 0).toFixed(0) > 1;
+const isSingular = () => !isSingular();
 </script>
